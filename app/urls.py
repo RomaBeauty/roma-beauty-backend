@@ -3,14 +3,14 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework.routers import DefaultRouter
 
-from core.views import CadastroViewSet, LoginViewSet, UserViewSet
+from core.views import CadastroViewSet, LoginViewSet, UserViewSet, FinalizarCompraViewSet
 
 router = DefaultRouter()
 
 router.register(r'usuarios', UserViewSet, basename='usuarios')
 router.register(r'login', LoginViewSet, basename='login')
 router.register(r'cadastro', CadastroViewSet, basename='cadastro')
-
+router.register(r'finalizarCompra', FinalizarCompraViewSet, basename='finalizarCompra')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
