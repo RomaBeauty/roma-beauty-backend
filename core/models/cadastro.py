@@ -4,6 +4,7 @@ from django.db import models
 class Cadastro(models.Model):
     nome = models.CharField(max_length=150)
     sobrenome = models.CharField(max_length=150)
+    telefone = models.CharField(max_length=20, default='000000000')
     email = models.EmailField(max_length=255, unique=True, verbose_name=('email'), help_text=('Email'))
     senha = models.CharField(max_length=128)
 
