@@ -9,10 +9,12 @@ from rest_framework.routers import DefaultRouter
 
 from core.views import UserViewSet
 from core.views.purchase import PurchaseViewSet   # 👈 importa o PurchaseViewSet
+from core.views.category import CategoryViewSet   # 👈 importa o CategoryViewSet
 
 router = DefaultRouter()
 router.register(r'usuarios', UserViewSet, basename='usuarios')
-router.register(r'purchases', PurchaseViewSet, basename='purchases')  # 👈 adiciona aqui
+router.register(r'purchases', PurchaseViewSet, basename='purchases')
+router.register(r'categories', CategoryViewSet, basename='categories')  # 👈 adiciona aqui
 
 urlpatterns = [
     path('admin/', admin.site.urls),

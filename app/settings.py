@@ -19,7 +19,9 @@ ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:8000',
+    'http://localhost:5173',
 ]
+
 
 # Application definition
 INSTALLED_APPS = [

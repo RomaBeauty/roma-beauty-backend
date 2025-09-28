@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 from core import models
 from core.models.purchase import Purchase
+from core.models.category import Category   # 👈 importa o model Category
 
 
 @admin.register(Purchase)
@@ -28,6 +29,13 @@ class PurchaseAdmin(admin.ModelAdmin):
             'fields': ('created_at', 'updated_at')
         }),
     )
+
+
+@admin.register(Category)   # 👈 registra a tabela Categoria
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'descricao')
+    search_fields = ('nome',)
+    list_filter = ('nome',)
 
 
 class UserAdmin(BaseUserAdmin):
