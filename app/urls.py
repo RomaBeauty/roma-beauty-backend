@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
@@ -11,12 +13,15 @@ from core.views import UserViewSet
 from core.views.purchase import PurchaseViewSet   # 👈 importa o PurchaseViewSet
 from core.views.category import CategoryViewSet   # 👈 importa o CategoryViewSet
 from core.views.tipo import TipoViewSet   # 👈 importa o TipoViewSet
+from core.views.colecao import ColecaoViewSet   # 👈 importa o ColecaoViewSet
+
 
 router = DefaultRouter()
 router.register(r'usuarios', UserViewSet, basename='usuarios')
 router.register(r'purchases', PurchaseViewSet, basename='purchases')
 router.register(r'categories', CategoryViewSet, basename='categories')  # 👈 adiciona aqui
 router.register(r'tipos', TipoViewSet, basename='tipos')
+router.register(r'colecoes', ColecaoViewSet, basename='colecoes')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,3 +40,5 @@ urlpatterns = [
     # API
     path('api/', include(router.urls)),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
