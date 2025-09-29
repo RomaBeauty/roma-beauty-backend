@@ -9,6 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from core import models
 from core.models.purchase import Purchase
 from core.models.category import Category   # 👈 importa o model Category
+from core.models.tipo import Tipo   # 👈 importa o model Tipo
 
 
 @admin.register(Purchase)
@@ -37,7 +38,12 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('nome',)
     list_filter = ('nome',)
 
-
+@admin.register(Tipo)
+class TipoAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'descricao')
+    search_fields = ('nome',)
+    list_filter = ('categoria',)
+    
 class UserAdmin(BaseUserAdmin):
     """Define the admin pages for users."""
 
