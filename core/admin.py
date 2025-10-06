@@ -64,12 +64,13 @@ class ProdutoAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Informações do Produto', {
-            'fields': ('nome', 'colecao', 'tipo', 'category', 'preco', 'imagem')
+            'fields': ('nome', 'colecao', 'tipo', 'category', 'preco', 'imagem_produto', 'imagem_amostra')
         }),
         ('Informações da Coleção', {
             'fields': ('descricao_colecao', 'imagem_mostruario_colecao')
         }),
     )
+
 
 
 class UserAdmin(BaseUserAdmin):
