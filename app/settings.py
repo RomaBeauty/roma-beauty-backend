@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-
 import dj_database_url
 from dotenv import load_dotenv
 
@@ -34,6 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # libs externas
     'cloudinary_storage',
     'cloudinary',
     'corsheaders',
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_spectacular',
     'rest_framework',
+
+    # apps do projeto
     'core',
 ]
 
@@ -51,7 +54,9 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',  # precisa vir antes de CommonMiddleware
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -59,7 +64,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# ------------------------------
+# CORS
+# ------------------------------
 CORS_ALLOW_ALL_ORIGINS = True
+# Em produção, use:
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:5173',
+#     'http://127.0.0.1:5173',
+#     'https://seudominio.com',
+# ]
 
 # ------------------------------
 # URLConf e Templates
@@ -116,15 +130,12 @@ USE_TZ = True
 # Static and Media files
 # ------------------------------
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # necessário para Django 5 e admin
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 FILE_UPLOAD_PERMISSIONS = 0o640
-
-if MODE == 'DEVELOPMENT':
-    MEDIA_URL = '/media/'
-else:
-    MEDIA_URL = '/media/'
 
 # ------------------------------
 # Cloudinary Storage
@@ -153,8 +164,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # API & DRF Settings
 # ------------------------------
 SPECTACULAR_SETTINGS = {
-    'TITLE': '<PROJETO> API',
-    'DESCRIPTION': 'API para o projeto <descreva aqui seu projeto>.',
+    'TITLE': 'Roma Beauty API',
+    'DESCRIPTION': 'API para gerenciamento de produtos, categorias e coleções.',
     'VERSION': '1.0.0',
 }
 
@@ -163,7 +174,7 @@ AUTH_USER_MODEL = 'core.User'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'app.pagination.CustomPagination',
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 42,
 }
 
 # ------------------------------
@@ -176,4 +187,4 @@ PASSAGE_AUTH_STRATEGY = 2
 # ------------------------------
 # Debug prints (opcional)
 # ------------------------------
-print(f'{MODE = } \n{MEDIA_URL = } \n{STATIC_ROOT = } \n{DATABASES = }')
+print(f"{MODE = }\n{MEDIA_URL = }\n{MEDIA_ROOT = }\n{STATIC_ROOT = }\n{DATABASES = }")

@@ -1,4 +1,8 @@
 from django.db import models
+from core.models.category import Category
+from core.models.colecao import Colecao
+from core.models.tipo import Tipo
+
 
 class Produto(models.Model):
     nome = models.CharField(max_length=100)
@@ -7,19 +11,19 @@ class Produto(models.Model):
     imagem_amostra = models.ImageField(upload_to='amostras/', blank=True, null=True)
 
     category = models.ForeignKey(
-        'core.Category',  # 👈 referência correta
+        Category,
         on_delete=models.CASCADE,
         related_name='produtos'
     )
 
     colecao = models.ForeignKey(
-        'Colecao',
+        Colecao,
         on_delete=models.CASCADE,
         related_name='produtos'
     )
 
     tipo = models.ForeignKey(
-        'Tipo',
+        Tipo,
         on_delete=models.CASCADE,
         related_name='produtos'
     )
