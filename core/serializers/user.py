@@ -1,10 +1,18 @@
-from rest_framework.serializers import ModelSerializer
+# serializers/user.py
+from rest_framework import serializers
+from django.contrib.auth import get_user_model
 
-from core.models import User
+User = get_user_model()
 
-
-class UserSerializer(ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
-        depth = 1
+        fields = ['id', 'name', 'email', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = User(**validated_data)
+        user.set_password(password)  # Cria hash da senha
+        user.save()
+        return user
