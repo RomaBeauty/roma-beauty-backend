@@ -12,6 +12,8 @@ from core.models.category import Category  # importa o model Category
 from core.models.tipo import Tipo  # importa o model Tipo
 from core.models.colecao import Colecao  # importa o model Colecao
 from core.models.produto import Produto  # importa o model Produto
+from core.models.sacola import ItemSacola
+from core.models.favorito import Favorito
 
 
 @admin.register(Purchase)
@@ -70,7 +72,30 @@ class ProdutoAdmin(admin.ModelAdmin):
             'fields': ('descricao_colecao', 'imagem_mostruario_colecao')
         }),
     )
+@admin.register(ItemSacola)
+class ItemSacolaAdmin(admin.ModelAdmin):
+    list_display = ('user', 'produto', 'quantidade', 'adicionado_em')
+    list_filter = ('user', 'produto')
+    search_fields = ('user__email', 'produto__nome')
+    readonly_fields = ('adicionado_em',)
+    fieldsets = (
+        ('Informações da Sacola', {
+            'fields': ('user', 'produto', 'quantidade', 'adicionado_em')
+        }),
+    )
 
+
+@admin.register(Favorito)
+class FavoritoAdmin(admin.ModelAdmin):
+    list_display = ('user', 'produto', 'adicionado_em')
+    list_filter = ('user', 'produto')
+    search_fields = ('user__email', 'produto__nome')
+    readonly_fields = ('adicionado_em',)
+    fieldsets = (
+        ('Favoritos', {
+            'fields': ('user', 'produto', 'adicionado_em')
+        }),
+    )
 
 
 class UserAdmin(BaseUserAdmin):

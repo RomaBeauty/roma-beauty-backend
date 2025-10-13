@@ -4,3 +4,5 @@ from .category import CategoryViewSet
 from .tipo import TipoViewSet
 from .colecao import ColecaoViewSet
 from .produto import ProdutoViewSet
+from .sacola import ItemSacolaViewSet
+from .favorito import FavoritoViewSet

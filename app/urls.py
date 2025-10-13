@@ -16,6 +16,8 @@ from core.views.category import CategoryViewSet   # 👈 importa o CategoryViewS
 from core.views.tipo import TipoViewSet   # 👈 importa o TipoViewSet
 from core.views.colecao import ColecaoViewSet   # 👈 importa o ColecaoViewSet
 from core.views.produto import ProdutoViewSet  #importa o ProdutoViewSet
+from core.views.sacola import ItemSacolaViewSet 
+from core.views.favorito import FavoritoViewSet
 
 
 router = DefaultRouter()
@@ -25,6 +27,8 @@ router.register(r'categories', CategoryViewSet, basename='categories')  # 👈 a
 router.register(r'tipos', TipoViewSet, basename='tipos')
 router.register(r'colecoes', ColecaoViewSet, basename='colecoes')
 router.register(r'produtos', ProdutoViewSet, basename='produtos')
+router.register(r'sacola', ItemSacolaViewSet, basename='sacola')
+router.register(r'favoritos', FavoritoViewSet, basename='favoritos')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -4,3 +4,5 @@ from .category import CategorySerializer
 from .tipo import TipoSerializer
 from .colecao import ColecaoSerializer
 from .produto import ProdutoSerializer
+from .sacola import ItemSacolaSerializer
+from .favorito import FavoritoSerializer
