@@ -68,12 +68,6 @@ MIDDLEWARE = [
 # CORS
 # ------------------------------
 CORS_ALLOW_ALL_ORIGINS = True
-# Em produção, use:
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:5173',
-#     'http://127.0.0.1:5173',
-#     'https://seudominio.com',
-# ]
 
 # ------------------------------
 # URLConf e Templates
@@ -172,6 +166,10 @@ SPECTACULAR_SETTINGS = {
 AUTH_USER_MODEL = 'core.User'
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    # NÃO usamos DEFAULT_PERMISSION_CLASSES global, assim produtos ficam públicos
     'DEFAULT_PAGINATION_CLASS': 'app.pagination.CustomPagination',
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'PAGE_SIZE': 42,

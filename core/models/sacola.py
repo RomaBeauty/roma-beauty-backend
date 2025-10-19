@@ -13,4 +13,5 @@ class ItemSacola(models.Model):
         unique_together = ('user', 'produto')
 
     def __str__(self):
-        return f"{self.produto.nome} - {self.user.username}"
+        return f"{self.user.email} - {self.produto.nome}"
+
