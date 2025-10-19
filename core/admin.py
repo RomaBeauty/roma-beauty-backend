@@ -14,14 +14,25 @@ from core.models.colecao import Colecao  # importa o model Colecao
 from core.models.produto import Produto  # importa o model Produto
 from core.models.sacola import ItemSacola
 from core.models.favorito import Favorito
+from core.models.purchase import PurchaseItem
 
+class PurchaseItemInline(admin.TabularInline):
+    model = PurchaseItem
+    extra = 0
+    readonly_fields = ('produto_nome', 'quantidade', 'preco_unitario')
+
+    # método para mostrar o nome do produto
+    def produto_nome(self, obj):
+        return obj.produto.nome
+    produto_nome.short_description = 'Produto'
 
 @admin.register(Purchase)
 class PurchaseAdmin(admin.ModelAdmin):
-    list_display = ['nome', 'sobrenome', 'email', 'telefone', 'cidade', 'estado', 'created_at']
+    list_display = ['nome', 'sobrenome', 'email', 'telefone', 'cidade', 'estado','total', 'created_at']
     list_filter = ['estado', 'cidade', 'created_at']
     search_fields = ['nome', 'sobrenome', 'email', 'telefone']
-    readonly_fields = ['created_at', 'updated_at']
+    readonly_fields = ['created_at', 'updated_at', 'total']
+
 
     fieldsets = (
         ('Informações Pessoais', {
@@ -34,6 +45,8 @@ class PurchaseAdmin(admin.ModelAdmin):
             'fields': ('created_at', 'updated_at')
         }),
     )
+
+    inlines = [PurchaseItemInline]
 
 
 @admin.register(Category)
