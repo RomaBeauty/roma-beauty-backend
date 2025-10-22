@@ -172,7 +172,7 @@ REST_FRAMEWORK = {
     # NÃO usamos DEFAULT_PERMISSION_CLASSES global, assim produtos ficam públicos
     'DEFAULT_PAGINATION_CLASS': 'app.pagination.CustomPagination',
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'PAGE_SIZE': 42,
+    'PAGE_SIZE': 300,
 }
 
 # ------------------------------
