@@ -5,6 +5,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from core.serializers import UserSerializer
 from core.models import User
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from core.serializers.user import MyTokenObtainPairSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -17,3 +20,5 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer

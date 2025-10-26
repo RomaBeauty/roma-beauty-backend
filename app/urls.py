@@ -18,6 +18,7 @@ from core.views.colecao import ColecaoViewSet   # 👈 importa o ColecaoViewSet
 from core.views.produto import ProdutoViewSet  #importa o ProdutoViewSet
 from core.views.sacola import ItemSacolaViewSet 
 from core.views.favorito import FavoritoViewSet
+from core.views import MyTokenObtainPairView
 
 
 router = DefaultRouter()
@@ -44,6 +45,7 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name='schema'),
         name='redoc',
     ),
+    path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     # API
     path('api/', include(router.urls)),
      path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
